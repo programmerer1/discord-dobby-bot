@@ -83,9 +83,10 @@ class KeyAndPromtAction
             $last = new DateTimeImmutable($lastPromt['created_at']);
             $seconds = $this->date->getTimestamp() - $last->getTimestamp();
 
-            if ($seconds < 180) {
-                $minutes = ceil((180 - $seconds) / 60);
-                $this->response->send(message: "Warning: The prompt command can be sent once every 3 minute. Time left: $minutes min.");
+            if ($seconds < 60) {
+                /*$timeLeft = (ceil((60 - $seconds) / 60)) . ' min.';*/
+                $timeLeft = (60 - $seconds) . ' sec.';
+                $this->response->send(message: 'Warning: The prompt command can be sent once every 1 minute. Time left: ' . $timeLeft);
             }
         }
 
